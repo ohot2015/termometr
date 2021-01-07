@@ -6,6 +6,7 @@ if (!empty($file)) {
     $data = substr($data, 0, -1);
     $file = substr($file, 1);
     $data .= ','.$file;
+
 }
 file_put_contents('./log.json', $data);
 ?>
