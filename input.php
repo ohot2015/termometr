@@ -8,6 +8,8 @@ if (!empty($file)) {
     $file .=  ',' . $data;
     //$data .= ','.$file;
 
+}else {
+    file_put_contents('./log.json', $data);
 }
 file_put_contents('./log.json', $file);
 ?>
