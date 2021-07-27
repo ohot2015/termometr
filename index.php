@@ -19,48 +19,48 @@ $superMax = -100;
 $superMin = 150;
 
 for ($i = 0; $i <= count($data);) {
-  $bufT1 =  $bufT2 =  $bufT3 =  $bufT4 = 0;
+    $bufT1 =  $bufT2 =  $bufT3 =  $bufT4 = 0;
 
-  for ($j = 0; $j < 10; $j++) {
-    if (empty($data[$i+$j])) {
-      break 2;
+    for ($j = 0; $j < 10; $j++) {
+        if (empty($data[$i+$j])) {
+            break 2;
+        }
+        $bufT1 += $data[$i+$j]['t']['t1'];
+        $bufT2 += $data[$i+$j]['t']['t2'];
+        $bufT3 += $data[$i+$j]['t']['t3'];
+
     }
-    $bufT1 += $data[$i+$j]['t']['t1'];
-    $bufT2 += $data[$i+$j]['t']['t2'];
-    $bufT3 += $data[$i+$j]['t']['t3'];
 
-  }
+    $i+=10;
+    $arr_date = explode(':', $data[$i]['time']);
+    $arr_date[0] += 2;
+    $arr_date[0] %= 24;
+    $time[] = implode(':',$arr_date);
 
-  $i+=10;
-  $arr_date = explode(':', $data[$i]['time']);
-  $arr_date[0] += 2;
-  $arr_date[0] %= 24;
-  $time[] = implode(':',$arr_date);
-
-  $sensor1[] = $bufT1/10;
-  $sensor2[] = $bufT2/10;
-  $sensor3[] = $bufT3/10;
+    $sensor1[] = $bufT1/10;
+    $sensor2[] = $bufT2/10;
+    $sensor3[] = $bufT3/10;
 
 
-  if ($superMax < $bufT1/10) {
-      $superMax = $bufT1/10;
-  }
-  if ($superMax < $bufT2/10) {
-      $superMax = $bufT2/10;
-  }
-  if ($superMax < $bufT3/10) {
-      $superMax = $bufT3/10;
-  }
+    if ($superMax < $bufT1/10) {
+        $superMax = $bufT1/10;
+    }
+    if ($superMax < $bufT2/10) {
+        $superMax = $bufT2/10;
+    }
+    if ($superMax < $bufT3/10) {
+        $superMax = $bufT3/10;
+    }
 
-  if ($superMin > $bufT1/10) {
-      $superMin = $bufT1/10;
-  }
-  if ($superMin > $bufT2/10) {
-      $superMin = $bufT2/10;
-  }
-  if ($superMin > $bufT3/10) {
-      $superMin = $bufT3/10;
-  }
+    if ($superMin > $bufT1/10) {
+        $superMin = $bufT1/10;
+    }
+    if ($superMin > $bufT2/10) {
+        $superMin = $bufT2/10;
+    }
+    if ($superMin > $bufT3/10) {
+        $superMin = $bufT3/10;
+    }
 
 }
 
@@ -83,24 +83,28 @@ $temperature = json_encode($temperature);
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>termometr</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-        #myChart {
-            width: calc(100vw - 140px);
-        }
-    </style>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>termometr</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css">
+  <style>
+      body {
+          margin: 0;
+          padding: 0;
+      }
+      .wrap{
+          width:100%;
+      }
+      #myChart {
+          width: calc(100vw - 140px);
+      }
+
+  </style>
 </head>
 <body>
-<div class="wrap"><canvas id="myChart"  height="600"></canvas></div>
+<div class="wrap"><canvas id="myChart" width="350px" height="600"></canvas></div>
 <button class="clear">очистить</button>
 <div><span>максимальная температура:</span><?php echo $superMax;?></div>
 <div><span>минимальная температура:</span><?php echo $superMin;?></div>
