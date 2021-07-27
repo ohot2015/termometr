@@ -7,7 +7,7 @@ $bot_username = 'pathePolivBot';
 try {
     // Create Telegram API object
     $telegram = new Longman\TelegramBot\Telegram($bot_api_key, $bot_username);
-    dump($telegram);exit;
+    //dump($telegram);exit;
     // Handle telegram webhook request
     $telegram->handle();
 } catch (Longman\TelegramBot\Exception\TelegramException $e) {
