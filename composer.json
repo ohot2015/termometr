@@ -4,5 +4,8 @@
   "require": {
     "php": ">=7.3",
     "longman/telegram-bot": "*"
+  },
+  "require-dev": {
+    "symfony/var-dumper": "^5.3"
   }
 }
