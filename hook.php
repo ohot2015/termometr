@@ -8,14 +8,25 @@ $bot_username = 'pathePolivBot';
 try {
     // Create Telegram API object
     $telegram = new Longman\TelegramBot\Telegram($bot_api_key, $bot_username);
-
-
-    $str = 'Начал поливать';
-    $result = \Longman\TelegramBot\Request::sendMessage([
-        'chat_id' => "-457457807",
-        'text'    => $str,
-    ]);
-    dump($result);
+    $rs = file_get_contents('php://input');
+    $jsonRs = json_decode($rs,true);
+    if ($jsonRs['message']['text'] === "включить полив") {
+        file_put_contents('./tg.logs', 1);
+        $str = 'Начал поливать';
+        $result = \Longman\TelegramBot\Request::sendMessage([
+            'chat_id' => "-457457807",
+            'text'    => $str,
+        ]);
+    }
+    else if ($jsonRs['message']['text'] === "выключить полив") {
+        file_put_contents('./tg.logs', 0);
+        $str = 'Закончил полив';
+        $result = \Longman\TelegramBot\Request::sendMessage([
+            'chat_id' => "-457457807",
+            'text'    => $str,
+        ]);
+    }
+    //dump($result);
     $telegram->handle();
 } catch (Longman\TelegramBot\Exception\TelegramException $e) {
     echo $e->getMessage();
