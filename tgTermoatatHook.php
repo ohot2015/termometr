@@ -6,16 +6,16 @@ $banel1ng_termostat_bot_username = 'banel1ng_termostat_bot';
 try {
     $telegram = new Longman\TelegramBot\Telegram($banel1ng_termostat_bot_bot_api_key, $banel1ng_termostat_bot_username);
     $rs = file_get_contents('php://input');
-    $rsFile = file_get_contents('./termCommand.json');
+    $jsResponse = file_get_contents('./termCommand.json');
     $jsonRs = json_decode($rs,true);
-    if (empty($rsFile)) {
+    if (empty($jsResponse)) {
         $jsResponse = [
             'debug'=> '',
             'tmax'=> '',
             'tmin'=> '',
         ];
     }
-    $rsFile = json_decode($rsFile);
+    $rsFile = json_decode($jsResponse);
     if (empty($rsFile)) {
         $jsResponse = [
             'debug'=> '',
