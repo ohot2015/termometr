@@ -8,25 +8,8 @@ try {
     $rs = file_get_contents('php://input');
     $jsResponse = file_get_contents('./termCommand.json');
     $jsonRs = json_decode($rs,true);
-    if (empty($jsResponse)) {
-        $jsResponse = [
-            'debug'=> '',
-            'tmax'=> '',
-            'tmin'=> '',
-        ];
-    }
-    else {
-        $jsResponse = json_decode($jsResponse);
-    }
 
-    if (empty($rsFile)) {
-        $jsResponse = [
-            'debug'=> '',
-            'tmax'=> '',
-            'tmin'=> '',
-        ];
-    }
-
+    $jsResponse = json_decode($jsResponse);
 
     if ($jsonRs['message']['text'] == "debug") {
         $jsResponse['debug'] = true;
