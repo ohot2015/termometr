@@ -15,7 +15,10 @@ try {
             'tmin'=> '',
         ];
     }
-    $jsResponse = json_decode($jsResponse);
+    else {
+        $jsResponse = json_decode($jsResponse);
+    }
+
     if (empty($rsFile)) {
         $jsResponse = [
             'debug'=> '',
