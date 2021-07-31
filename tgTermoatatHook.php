@@ -10,7 +10,7 @@ try {
     $jsonRs = json_decode($rs,true);
 
     $jsResponse = file_get_contents('./termCommand.json');
-    $jsResponse = json_decode($jsResponse);
+    $jsResponse = json_decode($jsResponse,true);
 
     if ($jsonRs['message']['text'] == "debug") {
         $jsResponse['debug'] = true;
