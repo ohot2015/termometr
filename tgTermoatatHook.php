@@ -13,11 +13,11 @@ try {
     $jsResponse = json_decode($jsResponse,true);
 
     if ($jsonRs['message']['text'] == "debug") {
-        $jsResponse['debug'] = true;
+        $jsResponse['debug'] = !$jsResponse['debug'];
         file_put_contents('./termCommand.json', json_encode($jsResponse));
         $result = \Longman\TelegramBot\Request::sendMessage([
             'chat_id' => "-411683583",
-            'text'    => 'установлен дебаг мод' ,
+            'text'    => $jsResponse['debug'] ? 'установлен дебаг мод': 'дебаг мод отключен',
         ]);
     }
 
