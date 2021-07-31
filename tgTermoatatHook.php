@@ -16,13 +16,10 @@ try {
             'text'    => 'установлен дебаг мод' ,
         ]);
     }
-    $result = \Longman\TelegramBot\Request::sendMessage([
-        'chat_id' => "-411683583",
-        'text'    => count($jsonRs['message']['text']) ,
-    ]);
+
     if (false != strstr($jsonRs['message']['text'] , 'tmax-')
-        && count($jsonRs['message']['text']) >= 5
-        && count($jsonRs['message']['text']) <= 7) {
+        && strlen ($jsonRs['message']['text']) >= 5
+        && strlen ($jsonRs['message']['text']) <= 7) {
         file_put_contents('./commandTermostat.log', $jsonRs['message']['text'] );
         $result = \Longman\TelegramBot\Request::sendMessage([
             'chat_id' => "-411683583",
@@ -31,8 +28,8 @@ try {
     }
 
     if (false != strstr($jsonRs['message']['text'] , 'tmin-')
-        && count($jsonRs['message']['text']) >= 5
-        && count($jsonRs['message']['text']) <= 7) {
+        && strlen ($jsonRs['message']['text']) >= 5
+        && strlen ($jsonRs['message']['text']) <= 7) {
         file_put_contents('./commandTermostat.log', $jsonRs['message']['text'] );
         $result = \Longman\TelegramBot\Request::sendMessage([
             'chat_id' => "-411683583",
