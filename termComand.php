@@ -10,7 +10,7 @@ try {
 
     $result = \Longman\TelegramBot\Request::sendMessage([
         'chat_id' => "-411683583",
-        'text'    => 'максимальная температура отправлена на термостат ' . $log,
+        'text'    => $log,
     ]);
 
     echo file_get_contents("termCommand.json");
