@@ -43,7 +43,7 @@ try {
 
         $result = \Longman\TelegramBot\Request::sendMessage([
             'chat_id' => "-411683583",
-            'text'    => 'минимальная температура отправлена на термостат' .  $jsResponse['tmin'],
+            'text'    => 'минимальная температура отправлена на термостат ' .  $jsResponse['tmin'],
         ]);
     }
 
