@@ -5,10 +5,11 @@ $banel1ng_termostat_bot_username = 'banel1ng_termostat_bot';
 
 try {
     $telegram = new Longman\TelegramBot\Telegram($banel1ng_termostat_bot_bot_api_key, $banel1ng_termostat_bot_username);
+
     $rs = file_get_contents('php://input');
-    $jsResponse = file_get_contents('./termCommand.json');
     $jsonRs = json_decode($rs,true);
 
+    $jsResponse = file_get_contents('./termCommand.json');
     $jsResponse = json_decode($jsResponse);
 
     if ($jsonRs['message']['text'] == "debug") {

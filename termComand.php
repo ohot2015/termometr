@@ -5,7 +5,7 @@ $banel1ng_termostat_bot_username = 'banel1ng_termostat_bot';
 
 try {
     $telegram = new Longman\TelegramBot\Telegram($banel1ng_termostat_bot_bot_api_key, $banel1ng_termostat_bot_username);
-    $data = json_decode(file_get_contents('./termCommand.json'));
+    //$data = json_decode(file_get_contents('./termCommand.json'));
     $log = file_get_contents('php://input');
 
     $result = \Longman\TelegramBot\Request::sendMessage([
