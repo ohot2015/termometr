@@ -3,14 +3,18 @@ require __DIR__ . '/vendor/autoload.php';
 $banel1ng_termostat_bot_bot_api_key ="1918038811:AAHR8inopkXWmXQdKqVbZTQATMpAUdAQTX8";
 $banel1ng_termostat_bot_username = 'banel1ng_termostat_bot';
 
-
 try {
     $telegram = new Longman\TelegramBot\Telegram($banel1ng_termostat_bot_bot_api_key, $banel1ng_termostat_bot_username);
     $rs = file_get_contents('php://input');
     $jsonRs = json_decode($rs,true);
-
+    $jsResponse = [
+        'debug'=> '',
+        'tmax'=> '',
+        'tmin'=> '',
+    ];
     if ($jsonRs['message']['text'] == "debug") {
-        file_put_contents('./commandTermostat.log', 'debug');
+        $jsResponse['debug'] = true;
+        file_put_contents('./termCommand.json', json_encode($jsResponse));
         $result = \Longman\TelegramBot\Request::sendMessage([
             'chat_id' => "-411683583",
             'text'    => 'установлен дебаг мод' ,
@@ -20,20 +24,26 @@ try {
     if (false != strstr($jsonRs['message']['text'] , 'tmax-')
         && strlen ($jsonRs['message']['text']) >= 5
         && strlen ($jsonRs['message']['text']) <= 7) {
-        file_put_contents('./commandTermostat.log', $jsonRs['message']['text'] );
+
+        $jsResponse['tmax'] = explode('-', $jsonRs['message']['text'] )[1];
+        file_put_contents('./termCommand.json', json_encode($jsResponse));
+
         $result = \Longman\TelegramBot\Request::sendMessage([
             'chat_id' => "-411683583",
-            'text'    => 'максимальная температура отправлена на термостат' ,
+            'text'    => 'максимальная температура отправлена на термостат ' . $jsResponse['tmax'] ,
         ]);
     }
 
     if (false != strstr($jsonRs['message']['text'] , 'tmin-')
         && strlen ($jsonRs['message']['text']) >= 5
         && strlen ($jsonRs['message']['text']) <= 7) {
-        file_put_contents('./commandTermostat.log', $jsonRs['message']['text'] );
+
+        $jsResponse['tmin'] = explode('-', $jsonRs['message']['text'] )[1];
+        file_put_contents('./termCommand.json', json_encode($jsResponse));
+
         $result = \Longman\TelegramBot\Request::sendMessage([
             'chat_id' => "-411683583",
-            'text'    => 'минимальная температура отправлена на термостат' ,
+            'text'    => 'минимальная температура отправлена на термостат' .  $jsResponse['tmin'],
         ]);
     }
 
