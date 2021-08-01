@@ -21,46 +21,48 @@ $superMin = 150;
 for ($i = 0; $i <= count($data);) {
     $bufT1 =  $bufT2 =  $bufT3 =  $bufT4 = 0;
 
-    for ($j = 0; $j < 10; $j++) {
-        if (empty($data[$i+$j])) {
-            break 2;
-        }
-        $bufT1 += $data[$i+$j]['t']['t1'];
-        $bufT2 += $data[$i+$j]['t']['t2'];
-        $bufT3 += $data[$i+$j]['t']['t3'];
-
-    }
-
+//    for ($j = 0; $j < 10; $j++) {
+//        if (empty($data[$i+$j])) {
+//            break 2;
+//        }
+//        $bufT1 += $data[$i+$j]['t']['t1'];
+//        $bufT2 += $data[$i+$j]['t']['t2'];
+//        $bufT3 += $data[$i+$j]['t']['t3'];
+//
+//    }
+    $bufT1 = $data[$i]['t']['t1'];
+    $bufT2 = $data[$i]['t']['t2'];
+    $bufT3 = $data[$i]['t']['t3'];
     $i+=10;
     $arr_date = explode(':', $data[$i]['time']);
     $arr_date[0] += 2;
     $arr_date[0] %= 24;
     $time[] = implode(':',$arr_date);
 
-    $sensor1[] = $bufT1/10;
-    $sensor2[] = $bufT2/10;
-    $sensor3[] = $bufT3/10;
+    $sensor1[] = $bufT1;///10;
+    $sensor2[] = $bufT2;///10;
+    $sensor3[] = $bufT3;///10;
 
-
-    if ($superMax < $bufT1/10) {
-        $superMax = $bufT1/10;
-    }
-    if ($superMax < $bufT2/10) {
-        $superMax = $bufT2/10;
-    }
-    if ($superMax < $bufT3/10) {
-        $superMax = $bufT3/10;
-    }
-
-    if ($superMin > $bufT1/10) {
-        $superMin = $bufT1/10;
-    }
-    if ($superMin > $bufT2/10) {
-        $superMin = $bufT2/10;
-    }
-    if ($superMin > $bufT3/10) {
-        $superMin = $bufT3/10;
-    }
+//
+//    if ($superMax < $bufT1/10) {
+//        $superMax = $bufT1/10;
+//    }
+//    if ($superMax < $bufT2/10) {
+//        $superMax = $bufT2/10;
+//    }
+//    if ($superMax < $bufT3/10) {
+//        $superMax = $bufT3/10;
+//    }
+//
+//    if ($superMin > $bufT1/10) {
+//        $superMin = $bufT1/10;
+//    }
+//    if ($superMin > $bufT2/10) {
+//        $superMin = $bufT2/10;
+//    }
+//    if ($superMin > $bufT3/10) {
+//        $superMin = $bufT3/10;
+//    }
 
 }
 
