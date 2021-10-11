@@ -1,7 +1,7 @@
 <?php
 $data = file_get_contents('./log.json');
 if (empty($data)) {
-    $data = '[{"t": {"t1":90, "t2":25, "t3":101.2},"r": {"n": true, "p": false},"time":"31:11.1000"},{"t": {"t1":10, "t2":15, "t3":11.2},"r": {"n": true, "p": false},"time":"31:12.1000"},{"t": {"t1":10, "t2":15, "t3":11.2},"r": {"n": true, "p": false},"time":"31:12.500"}]';
+    $data = '[{"t": {"t1":90},"r": {"n": true, "p": false},"time":"31:11.1000"}]';
 }
 
 $data = json_decode($data, true);
@@ -9,8 +9,8 @@ $data = json_decode($data, true);
 $temperature = [];
 $sensor1=[];
 //$sensor11=[];
-$sensor2=[];
-$sensor3=[];
+//$sensor2=[];
+//$sensor3=[];
 
 $time = [];
 
@@ -69,15 +69,17 @@ echo '<br><br><br><br>';
 foreach ($data as $key => $d) {
 
     $sensor1[] = $d['t']['t1'];
-    $sensor2[] = $d['t']['t2'];
-    $sensor3[] = $d['t']['t3'];
-    $sensor4[] = $d['t']['t4'];
+//    $sensor2[] = $d['t']['t2'];
+//    $sensor3[] = $d['t']['t3'];
+//    $sensor4[] = $d['t']['t4'];
     $time[] = $d['time'];
 }
 
 $superMin = min($sensor1);
 $superMax = max($sensor1);
-$temperature = [$sensor1,$sensor2,$sensor3];
+$temperature = [$sensor1
+//    ,$sensor2,$sensor3
+];
 //var_dump($temperature);
 $time = json_encode($time);
 $temperature = json_encode($temperature);
