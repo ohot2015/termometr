@@ -13,7 +13,7 @@ $rele = [];
 foreach ($data as $key => $d) {
     $sensor1[] = $d['t']['t1'];
     $time[] = $d['time'];
-    $rele[] = $d['r'];
+    $rele[] = $d['r']['n'];
 }
 
 $superMin = min($sensor1);
