@@ -5,7 +5,7 @@ $file = file_get_contents('./log.json');
 
 if (!empty($file)) {
     $file = json_decode($file,true);
-    if (count($file) > 1000) {
+    if (count($file) > 8400) {
         $file = array_splice($file, 30);
     }
     $data = json_decode($data,true);
