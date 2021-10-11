@@ -14,11 +14,12 @@ DallasTemperature sensor(&oneWire);
 
 // пины реле 
 int relay1 = 13;
+// реле 1 тот что с права если положить к себе входом по поитанию платы 
 int relay4 = 27;
 
 // debuger
 bool debug = true;
-String DebugData="";
+String DebugData="123";
 
 // вайфай
 #include <WiFi.h>
@@ -53,7 +54,7 @@ void setup(){
  
   sensor.begin();
   // устанавливаем разрешение датчика от 9 до 12 бит
-  sensor.setResolution(12);
+  sensor.setResolution(9);
   
 }
 // для того чтоб не выводить сообщение о подключении постоянно и чтоб не блочить работу если нет вайфая 
@@ -61,6 +62,7 @@ bool wifiConected = false;
 String str = "";
 
 void loop(){
+   
   // только вывод о подключении вайфая 
   if (WiFi.status() == WL_CONNECTED and !wifiConected) {
     wifiConected = true;
@@ -89,10 +91,10 @@ void loop(){
 
   Serial.print("Temp C: ");
   Serial.println(temperature);
-  timeClient.setTimeOffset(3600); 
+  timeClient.setTimeOffset(3600*3); 
   timeClient.update();   
   str += "{\"t\": {\"t1\":" + String(temperature) + "},\"r\": {\"n\": "+String(releMod)+", \"p\": false},\"time\":\"" + timeClient.getFormattedTime() + "\"},";   
-
+  DebugData+= "t " + String(temperature) + ' '+  timeClient.getFormattedTime() + '\n';
   if(WiFi.status()== WL_CONNECTED){
      // Serial.println("отправка на сервер"); 
      // Serial.println(serverName);   
@@ -139,5 +141,5 @@ void loop(){
       Serial.println("WiFi Disconnected");
       DebugData+="WiFi Disconnected" + '\n';
     }
-  delay(10000);
+  delay(1000);
 }

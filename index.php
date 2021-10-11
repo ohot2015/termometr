@@ -15,8 +15,7 @@ $sensor3=[];
 $time = [];
 
 $data = array_slice($data, -50000);
-$superMax = -100;
-$superMin = 150;
+
 //
 //for ($i = 0; $i <= count($data);) {
 //    $bufT1 =  $bufT2 =  $bufT3 =  $bufT4 = 0;
@@ -76,6 +75,8 @@ foreach ($data as $key => $d) {
     $time[] = $d['time'];
 }
 
+$superMin = min($sensor1);
+$superMax = max($sensor1);
 $temperature = [$sensor1,$sensor2,$sensor3];
 //var_dump($temperature);
 $time = json_encode($time);
