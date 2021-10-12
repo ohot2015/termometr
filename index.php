@@ -57,6 +57,7 @@ $temperature = json_encode($temperature);
 <div><span>минимальная температура:</span><?php echo $superMin;?></div>
 <div><span>всего измерений:</span><?php echo count($data);?></div>
 <div><span>РЕЛЕ :</span><?php $r = ($rele[count($rele ) -1 ] === false ) ?  'Вкл' : 'Выкл'; echo $r;?></div>
+<div><span>РЕЛЕ :</span><?php echo $rele[count($rele )];?></div>
 
 <!--<script-->
 <!--    src="https://code.jquery.com/jquery-3.5.1.slim.min.js"-->
