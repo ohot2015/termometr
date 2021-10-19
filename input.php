@@ -25,7 +25,7 @@ if (!empty($file)) {
     $dateMyFormat2= explode(':', $dateMyFormat2);
 
     $dlog = $dateMyFormat2[2] + $dateMyFormat2[1]*60 + $dateMyFormat2[0]*60*60;
-    //file_put_contents('log3.json', $dlog . $d);
+    file_put_contents('log3.json',  $d - $dlog);
     if ($d - $dlog > 100) {
         try {
             $telegram = new Longman\TelegramBot\Telegram($banel1ng_termostat_bot_bot_api_key, $banel1ng_termostat_bot_username);
