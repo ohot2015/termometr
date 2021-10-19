@@ -24,13 +24,13 @@ if (!empty($file)) {
 
     if ($d - $dlog > 60) {
         try {
-            $telegram = new Longman\TelegramBot\Telegram($banel1ng_termostat_bot_bot_api_key, $banel1ng_termostat_bot_username);
-            $result = \Longman\TelegramBot\Request::sendMessage([
-                'chat_id' => "-411683583",
-                'text'    => $d - $dlog. 'не приходили новые данные' ,
-            ]);
-
-            $telegram->handle();
+//            $telegram = new Longman\TelegramBot\Telegram($banel1ng_termostat_bot_bot_api_key, $banel1ng_termostat_bot_username);
+//            $result = \Longman\TelegramBot\Request::sendMessage([
+//                'chat_id' => "-411683583",
+//                'text'    => $d - $dlog. 'не приходили новые данные' ,
+//            ]);
+            file_put_contents('log3.json', $d - $dlog. 'не приходили новые данные' );
+           // $telegram->handle();
         } catch (Longman\TelegramBot\Exception\TelegramException $e) {
             echo $e->getMessage();
         }
