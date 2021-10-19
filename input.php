@@ -17,10 +17,13 @@ if (!empty($file)) {
     $lastElemLog = $file[count($file) - 1];
     $date = new DateTime();
     $dateFormat = $date->format('H:i:s');
-    file_put_contents('log3.json', $dateFormat );
+
     $dateMyFormat = explode(':',$dateFormat);
     $d = $dateMyFormat[2]*$dateMyFormat[1]*$dateMyFormat[0];
     $dateMyFormat2 = $lastElemLog['time'];
+    file_put_contents('log3.json', $dateMyFormat2 . $dateFormat);
+    $dateMyFormat2= explode(':', $dateMyFormat2);
+
     $dlog = $dateMyFormat2[2]*$dateMyFormat2[1]*$dateMyFormat2[0];
 
     if ($d - $dlog > 60) {
