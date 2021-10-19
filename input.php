@@ -25,16 +25,16 @@ if (!empty($file)) {
     $dateMyFormat2= explode(':', $dateMyFormat2);
 
     $dlog = $dateMyFormat2[2] + $dateMyFormat2[1]*60 + $dateMyFormat2[0]*60*60;
-    file_put_contents('log3.json', $dlog . $d);
-    if ($d - $dlog > 60) {
+    //file_put_contents('log3.json', $dlog . $d);
+    if ($d - $dlog > 100) {
         try {
-//            $telegram = new Longman\TelegramBot\Telegram($banel1ng_termostat_bot_bot_api_key, $banel1ng_termostat_bot_username);
-//            $result = \Longman\TelegramBot\Request::sendMessage([
-//                'chat_id' => "-411683583",
-//                'text'    => $d - $dlog. 'не приходили новые данные' ,
-//            ]);
-            //file_put_contents('log3.json', $d - $dlog. 'не приходили новые данные' );
-           // $telegram->handle();
+            $telegram = new Longman\TelegramBot\Telegram($banel1ng_termostat_bot_bot_api_key, $banel1ng_termostat_bot_username);
+            $result = \Longman\TelegramBot\Request::sendMessage([
+                'chat_id' => "-411683583",
+                'text'    => $d - $dlog. 'не приходили новые данные' ,
+            ]);
+            file_put_contents('log3.json', $d - $dlog. ' секунд не приходили новые данные' );
+            $telegram->handle();
         } catch (Longman\TelegramBot\Exception\TelegramException $e) {
             echo $e->getMessage();
         }
