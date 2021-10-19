@@ -19,13 +19,13 @@ if (!empty($file)) {
     $dateFormat = $date->format('H:i:s');
 
     $dateMyFormat = explode(':',$dateFormat);
-    $d = $dateMyFormat[2]*$dateMyFormat[1]*$dateMyFormat[0];
+    $d = $dateMyFormat[2] + $dateMyFormat[1]*60 + $dateMyFormat[0]*60*60;
     $dateMyFormat2 = $lastElemLog['time'];
-    file_put_contents('log3.json', $dateMyFormat2 . $dateFormat);
+
     $dateMyFormat2= explode(':', $dateMyFormat2);
 
-    $dlog = $dateMyFormat2[2]*$dateMyFormat2[1]*$dateMyFormat2[0];
-
+    $dlog = $dateMyFormat2[2] + $dateMyFormat2[1]*60 + $dateMyFormat2[0]*60*60;
+    file_put_contents('log3.json', $dlog . $d);
     if ($d - $dlog > 60) {
         try {
 //            $telegram = new Longman\TelegramBot\Telegram($banel1ng_termostat_bot_bot_api_key, $banel1ng_termostat_bot_username);
