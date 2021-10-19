@@ -17,6 +17,7 @@ if (!empty($file)) {
     $lastElemLog = $file[count($file) - 1];
     $date = new DateTime();
     $dateFormat = $date->format('H:i:s');
+    file_put_contents('log3.json', $dateFormat );
     $dateMyFormat = explode(':',$dateFormat);
     $d = $dateMyFormat[2]*$dateMyFormat[1]*$dateMyFormat[0];
     $dateMyFormat2 = $lastElemLog['time'];
@@ -29,7 +30,7 @@ if (!empty($file)) {
 //                'chat_id' => "-411683583",
 //                'text'    => $d - $dlog. 'не приходили новые данные' ,
 //            ]);
-            file_put_contents('log3.json', $d - $dlog. 'не приходили новые данные' );
+            //file_put_contents('log3.json', $d - $dlog. 'не приходили новые данные' );
            // $telegram->handle();
         } catch (Longman\TelegramBot\Exception\TelegramException $e) {
             echo $e->getMessage();
