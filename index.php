@@ -1,4 +1,5 @@
 <?php
+
 $data = file_get_contents('./log.json');
 if (empty($data)) {
     $data = '[{"t": {"t1":90},"r": {"n": true, "p": false},"time":"31:11.1000"}]';
@@ -12,7 +13,9 @@ $rele = [];
 
 foreach ($data as $key => $d) {
     $sensor1[] = $d['t']['t1'];
-    $time[] = $d['time'];
+    $timeArr = explode(':',$d['time']);
+    $timeArr[0] = +$timeArr[0]+2 % 24;
+    $time[] = implode(':',$timeArr);
     $rele[] = $d['r']['n'];
 }
 
