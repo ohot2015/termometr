@@ -13,9 +13,7 @@ $rele = [];
 
 foreach ($data as $key => $d) {
     $sensor1[] = $d['t']['t1'];
-    $timeArr = explode(':',$d['time']);
-    $timeArr[0] = +$timeArr[0]+2 % 24;
-    $time[] = implode(':',$timeArr);
+    $time[] = $d['time'];
     $rele[] = $d['r']['n'];
 }
 
