@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 // Load composer
 require __DIR__ . '/vendor/autoload.php';
 
-$bot_api_key  = '1845276413:AAG0BJt1zIxMy18OvvH_c31NOB2asnCQ7XY';
+$bot_api_key  = '1918038811:AAHR8inopkXWmXQdKqVbZTQATMpAUdAQTX8';
 $bot_username = 'banel1ng_termostat_bot';
 
 $banel1ng_termostat_bot_bot_api_key ="1918038811:AAHR8inopkXWmXQdKqVbZTQATMpAUdAQTX8";
