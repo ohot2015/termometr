@@ -5,14 +5,14 @@ $banel1ng_termostat_bot_bot_api_key ="1918038811:AAHR8inopkXWmXQdKqVbZTQATMpAUdA
 $banel1ng_termostat_bot_username = 'banel1ng_termostat_bot';
 
 try {
-    //$telegram = new Longman\TelegramBot\Telegram($banel1ng_termostat_bot_bot_api_key, $banel1ng_termostat_bot_username);
+    $telegram = new Longman\TelegramBot\Telegram($banel1ng_termostat_bot_bot_api_key, $banel1ng_termostat_bot_username);
 
     $result = \Longman\TelegramBot\Request::sendMessage([
         'chat_id' => "-411683583",
         'text'    => 'test',
     ]);
 
-    //$telegram->handle();
+    $telegram->handle();
 } catch (Longman\TelegramBot\Exception\TelegramException $e) {
     echo $e->getMessage();
 }
