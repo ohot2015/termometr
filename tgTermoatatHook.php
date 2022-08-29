@@ -7,11 +7,11 @@ try {
     $telegram = new Longman\TelegramBot\Telegram($banel1ng_termostat_bot_bot_api_key, $banel1ng_termostat_bot_username);
 
     $rs = file_get_contents('php://input');
-    $jsResponse = json_decode($jsResponse,true);
+
     $jsonRs = json_decode($rs,true);
 
     $jsResponse = file_get_contents('./termCommand.json');
-
+    $jsResponse = json_decode($jsResponse,true);
     file_put_contents('./test', json_encode($jsResponse));
     if ($jsonRs['message']['text'] == "debug") {
         $jsResponse['debug'] = !$jsResponse['debug'];
