@@ -12,6 +12,7 @@ try {
         'text'    => 'test',
     ]);
 
+
     $telegram->handle();
 } catch (Longman\TelegramBot\Exception\TelegramException $e) {
     echo $e->getMessage();

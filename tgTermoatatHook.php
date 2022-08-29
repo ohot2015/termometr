@@ -49,5 +49,5 @@ try {
 
     $telegram->handle();
 } catch (Longman\TelegramBot\Exception\TelegramException $e) {
-    echo $e->getMessage();
+    file_put_contents('./termCommand.json', $e->getMessage());
 }
