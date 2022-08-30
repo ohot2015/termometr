@@ -12,7 +12,6 @@ services:
     volumes:
       - ./docker/mysql/data:/var/lib/mysql
       - ./docker/mysql/log:/var/log/mysql
-      -
   grafana:
     image: grafana/grafana
     container_name: grafana
