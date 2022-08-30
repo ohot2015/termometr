@@ -20,8 +20,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - /docker/grafana/grafana_data:/var/lib/grafana
-      - /docker/grafana/certs:/certs
+      - ./docker/grafana:/var/lib/grafana'
     environment:
       - HTTP_USER="admin"
       - HTTP_PASS="123qweasd"
@@ -31,4 +30,3 @@ services:
       - MYSQL_USER="root"
       - MYSQL_PASS="123qweasd"
     restart: always
-
