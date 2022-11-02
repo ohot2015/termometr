@@ -43,16 +43,14 @@ $temperature = json_encode($temperature);
           padding: 0;
       }
       .wrap{
-          width:100%;
+          position: relative;
+          height: calc(100vh - 150px);
+          width: 100vw;
       }
-      #myChart {
-          width: calc(100vw - 140px);
-      }
-
   </style>
 </head>
 <body>
-<div class="wrap"><canvas id="myChart" width="350px" height="600"></canvas></div>
+<div class="wrap"><canvas id="myChart"></canvas></div>
 <button class="clear">очистить</button>
 <div><span>максимальная температура:</span><?php echo $superMax;?></div>
 <div><span>минимальная температура:</span><?php echo $superMin;?></div>
@@ -93,7 +91,8 @@ $temperature = json_encode($temperature);
       datasets: temp
     },
     options: {
-      responsive: false,
+      responsive: true,
+      maintainAspectRatio:false,
       title: {
         display: true,
         text: 'Chart.js Line Chart'
