@@ -2,7 +2,14 @@ bool releMod = LOW;
 byte tmin = 91;
 byte tmax = 92;
 
+// софт перезагрука
+void(* resetFunc) (void) = 0;
 
+// display 
+#define CLK 22
+#define DIO 21
+#include <TM1637Display.h>
+TM1637Display display(CLK, DIO);
 
 // для работы с термометром 
 #include <OneWire.h>
@@ -24,12 +31,12 @@ String DebugData="";
 #include <WiFi.h>
 #include <WiFiClient.h>
 #include "HTTPClient.h"
-//const char* ssid = "arduino";
-//const char* password = "123qweasdzxc";
+const char* ssid = "arduino";
+const char* password = "123qweasdzxc";
 unsigned long previousMillis = 0;
 unsigned long interval = 30000;
-const char* ssid = "linux";
-const char* password = "123qweasdzxc123";
+// const char* ssid = "linux";
+// const char* password = "123qweasdzxc123";
 
 String serverName =  "http://37.230.115.8/";
 
@@ -57,12 +64,18 @@ void setup(){
   pinMode(relay4, OUTPUT);    
    
   sensor.begin();
-  
+    
+  display.setBrightness(0x0f);
 }
 
 String str = "";
 
 void loop(){
+ 
+  uint8_t data[] = { 0xff, 0xff, 0xff, 0xff };
+  uint8_t blank[] = { 0x00, 0x00, 0x00, 0x00 };
+  display.setSegments(data);
+
   unsigned long currentMillis = millis();
     // if WiFi is down, try reconnecting
   if ((WiFi.status() != WL_CONNECTED) && (currentMillis - previousMillis >=interval)) {
@@ -75,12 +88,11 @@ void loop(){
   }
  
   // переменная для хранения температуры
-  float temperature;
+  float temperature;  
   // отправляем запрос на измерение температуры
   sensor.requestTemperatures();
   // считываем данные из регистра датчика
-  temperature = sensor.getTempCByIndex(0);
-
+  temperature = sensor.getTempCByIndex(0);  
 
   if (temperature  > tmax) {
     releMod = LOW ;              
@@ -90,10 +102,16 @@ void loop(){
   }
   
   digitalWrite(relay1, releMod); 
-  digitalWrite(relay4, releMod); 
+  digitalWrite(relay4, not releMod); 
 
   Serial.print("Temp C: ");
   Serial.println(temperature);
+//  int integer_temperature1  =  temperature * 100 ;  
+ 
+ 
+  display.showNumberDec(ceil(temperature), false);
+  
+
   timeClient.setTimeOffset(10800);// 60*60*3 
   timeClient.update();   
   str += "{\"t\": {\"t1\":" + String(temperature) + "},\"r\": {\"n\": "+String(releMod)+", \"p\": false},\"time\":\"" + timeClient.getDay() +"-"+ timeClient.getFormattedTime() + "\"},";   
@@ -134,8 +152,11 @@ void loop(){
         deserializeJson(doc, payload);
         
         debug = doc["debug"];
-        tmax = doc["tmax"];
-        tmin = doc["tmin"];    
+        if (debug){
+          tmax = doc["tmax"];
+          tmin = doc["tmin"];    
+        }
+        
         Serial.println("payloadJson " + String(debug) + " " + tmax + " " + tmin ); 
         DebugData ="";
       }
@@ -148,16 +169,24 @@ void loop(){
       Serial.println("WiFi Disconnected");
       DebugData+="WiFi Disconnected" + '\n';
     }
+
   delay(10000);
+  display.clear();
 }
 
 void initWiFi() {
+  int counter = 0;
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
   Serial.print("Connecting to WiFi ..");
   while (WiFi.status() != WL_CONNECTED) {
     Serial.print('.');
     errorLed(3);
+    counter += 1;
+    if (counter > 5) {
+      Serial.println("resetting");
+      resetFunc();      
+    }
   }
   Serial.println(WiFi.localIP());
 }
