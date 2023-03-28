@@ -9,7 +9,7 @@ try {
     $log = file_get_contents('php://input');
 
     $result = \Longman\TelegramBot\Request::sendMessage([
-        'chat_id' => "-411683583",
+        'chat_id' => "-1001753476179",
         'text'    => $log,
     ]);
 

@@ -1,5 +1,20 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
+use Symfony\Component\VarDumper\Cloner\VarCloner;
+use Symfony\Component\VarDumper\Dumper\CliDumper;
+use Symfony\Component\VarDumper\Dumper\ContextProvider\CliContextProvider;
+use Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider;
+use Symfony\Component\VarDumper\Dumper\HtmlDumper;
+use Symfony\Component\VarDumper\Dumper\ServerDumper;
+use Symfony\Component\VarDumper\VarDumper;
+
+$cloner = new VarCloner();
+$fallbackDumper = \in_array(\PHP_SAPI, ['cli', 'phpdbg']) ? new CliDumper() : new HtmlDumper();
+$dumper = new ServerDumper('tcp://127.0.0.1:9912', $fallbackDumper, [
+    'cli' => new CliContextProvider(),
+    'source' => new SourceContextProvider(),
+]);
+
 $banel1ng_termostat_bot_bot_api_key ="1918038811:AAHR8inopkXWmXQdKqVbZTQATMpAUdAQTX8";
 $banel1ng_termostat_bot_username = 'banel1ng_termostat_bot';
 
@@ -17,7 +32,7 @@ try {
         $jsResponse['debug'] = !$jsResponse['debug'];
         file_put_contents('./termCommand.json', json_encode($jsResponse));
         $result = \Longman\TelegramBot\Request::sendMessage([
-            'chat_id' => "-411683583",
+            'chat_id' => "-1001753476179",
             'text'    => $jsResponse['debug'] ? 'установлен дебаг мод': 'дебаг мод отключен',
         ]);
     }
@@ -30,7 +45,7 @@ try {
         file_put_contents('./termCommand.json', json_encode($jsResponse));
 
         $result = \Longman\TelegramBot\Request::sendMessage([
-            'chat_id' => "-411683583",
+            'chat_id' => "-1001753476179",
             'text'    => 'максимальная температура отправлена на термостат ' . $jsResponse['tmax'] ,
         ]);
     }
@@ -43,7 +58,7 @@ try {
         file_put_contents('./termCommand.json', json_encode($jsResponse));
 
         $result = \Longman\TelegramBot\Request::sendMessage([
-            'chat_id' => "-411683583",
+            'chat_id' => "-1001753476179",
             'text'    => 'минимальная температура отправлена на термостат ' .  $jsResponse['tmin'],
         ]);
     }
